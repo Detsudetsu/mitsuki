@@ -1,0 +1,5 @@
+/.cache
+/.venv
+/dist
+/scm_version_test.egg-info
+/不明なタイトル
