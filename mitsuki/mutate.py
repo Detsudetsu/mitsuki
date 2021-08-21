@@ -1,14 +1,17 @@
 import mutagen
+from pathlib import Path
 
-chim = mutagen.File("不明なタイトル/1.01. トラック01.flac")
-chim.tags["DISCNUMBER"] = str(1)
-chim.tags["TRACKNUMBER"] = str(1)
-chim.tags["TITLE"] = "もう気が狂う"
-chim.tags["ARTIST"] = "珍宝"
-chim.tags["ALBUM"] = "仏法僧"
-chim.tags["ALBUMARTIST"] = ["ちんちん"]
-print(chim)
-chim.save()
+album_dir = Path("Peachy!")
 
-ramu = mutagen.File("不明なタイトル/1.02. トラック02.flac")
-print(ramu)
+for i, file in enumerate(album_dir.iterdir(), 1):
+    chim = mutagen.File(file)
+    chim.tags["DISCNUMBER"] = str(1)
+    chim.tags["TRACKNUMBER"] = str(i)
+    chim.tags["TITLE"] = ""
+    chim.tags["ARTIST"] = ""
+    chim.tags["ALBUM"] = ""
+    chim.tags["ALBUMARTIST"] = [""]
+    chim.save()
+
+    filename = "Track " + str(i).zfill(2) + file.suffix
+    file.rename(album_dir / filename)
